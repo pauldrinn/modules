@@ -3,11 +3,17 @@
         "content": [
             "test.plotPCA.pdf",
             "test.plotPCA.tab",
-            [
-                "versions.yml:md5,07fd5434a2e1f37aed3a032fd3479847"
-            ]
+            {
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTPCA",
+                        "deeptools",
+                        "3.5.6"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-02-15T15:04:49.194938",
+        "timestamp": "2026-02-17T10:10:12.968432",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -33,7 +39,11 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,07fd5434a2e1f37aed3a032fd3479847"
+                    [
+                        "DEEPTOOLS_PLOTPCA",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ],
                 "pdf": [
                     [
@@ -51,12 +61,16 @@
                         "test.plotPCA.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,07fd5434a2e1f37aed3a032fd3479847"
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTPCA",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-02-15T15:05:10.568319",
+        "timestamp": "2026-02-17T10:10:29.220637",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

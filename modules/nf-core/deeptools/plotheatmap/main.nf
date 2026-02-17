@@ -13,7 +13,7 @@ process DEEPTOOLS_PLOTHEATMAP {
     output:
     tuple val(meta), path("*.pdf"), emit: pdf
     tuple val(meta), path("*.tab"), emit: table
-    path  "versions.yml"          , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('plotHeatmap --version | sed -e "s/plotHeatmap //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -42,7 +42,7 @@ process DEEPTOOLS_PLOTHEATMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        deeptools: \$(plotFingerprint --version | sed -e "s/plotFingerprint //g")
+        deeptools: \$(plotHeatmap --version | sed -e "s/plotHeatmap //g")
     END_VERSIONS
     """
 }

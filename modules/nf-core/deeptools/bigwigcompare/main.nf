@@ -13,7 +13,7 @@ process DEEPTOOLS_BIGWIGCOMPARE {
 
     output:
     tuple val(meta), path("*.{bigWig,bedgraph}"), emit: output
-    path "versions.yml"                         , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('bigwigCompare --version | sed -e "s/bigwigCompare //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

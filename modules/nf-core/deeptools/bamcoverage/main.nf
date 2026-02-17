@@ -16,7 +16,8 @@ process DEEPTOOLS_BAMCOVERAGE {
     output:
     tuple val(meta), path("*.bigWig")  , emit: bigwig  , optional: true
     tuple val(meta), path("*.bedgraph"), emit: bedgraph, optional: true
-    path "versions.yml"                , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('bamCoverage --version | sed -e "s/bamCoverage //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('samtools'), eval('samtools --version | head -n1 | sed -e "s/samtools //g"') , emit: versions_samtools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -47,8 +48,8 @@ process DEEPTOOLS_BAMCOVERAGE {
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
             deeptools: \$(bamCoverage --version | sed -e "s/bamCoverage //g")
+            samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
         END_VERSIONS
         """
     }
@@ -77,6 +78,7 @@ process DEEPTOOLS_BAMCOVERAGE {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         deeptools: \$(bamCoverage --version | sed -e "s/bamCoverage //g")
+        samtools: \$(samtools --version | head -n1 | sed -e "s/samtools //g")
     END_VERSIONS
     """
 }

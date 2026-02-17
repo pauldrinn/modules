@@ -10,11 +10,17 @@
                     "test.plotCorrelation.mat.tab:md5,24e46b74bd580e22c48687a1843eaa5f"
                 ]
             ],
-            [
-                "versions.yml:md5,6a89835d97baff2b115424dd82608697"
-            ]
+            {
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTCORRELATION",
+                        "deeptools",
+                        "3.5.6"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-02-15T15:01:46.206026",
+        "timestamp": "2026-02-17T09:37:34.877591",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -31,11 +37,17 @@
                     "test.plotCorrelation.mat.tab:md5,24e46b74bd580e22c48687a1843eaa5f"
                 ]
             ],
-            [
-                "versions.yml:md5,6a89835d97baff2b115424dd82608697"
-            ]
+            {
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTCORRELATION",
+                        "deeptools",
+                        "3.5.6"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-02-15T15:02:37.946848",
+        "timestamp": "2026-02-17T09:38:27.6396",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -52,11 +64,17 @@
                     "test.plotCorrelation.mat.tab:md5,24e46b74bd580e22c48687a1843eaa5f"
                 ]
             ],
-            [
-                "versions.yml:md5,6a89835d97baff2b115424dd82608697"
-            ]
+            {
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTCORRELATION",
+                        "deeptools",
+                        "3.5.6"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-02-15T15:02:13.327081",
+        "timestamp": "2026-02-17T09:38:04.9231",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -82,7 +100,11 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,6a89835d97baff2b115424dd82608697"
+                    [
+                        "DEEPTOOLS_PLOTCORRELATION",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ],
                 "matrix": [
                     [
@@ -100,12 +122,16 @@
                         "test.plotCorrelation.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,6a89835d97baff2b115424dd82608697"
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTCORRELATION",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-02-15T15:02:53.97604",
+        "timestamp": "2026-02-17T09:38:43.918081",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

@@ -13,7 +13,7 @@ process DEEPTOOLS_MULTIBAMSUMMARY {
 
     output:
     tuple val(meta), path("*.npz"), emit: matrix
-    path  "versions.yml"          , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('multiBamSummary --version | sed -e "s/multiBamSummary //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

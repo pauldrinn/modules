@@ -15,7 +15,7 @@ process DEEPTOOLS_PLOTCORRELATION {
     output:
     tuple val(meta), path("*.pdf"), emit: pdf
     tuple val(meta), path("*.tab"), emit: matrix
-    path  "versions.yml"          , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('plotCorrelation --version | sed -e "s/plotCorrelation //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

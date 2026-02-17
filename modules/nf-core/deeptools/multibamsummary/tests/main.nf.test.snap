@@ -2,11 +2,17 @@
     "homo_sampiens - bam": {
         "content": [
             "all_bam.bamSummary.npz",
-            [
-                "versions.yml:md5,0b24ca59514be35f78fa441a80b416eb"
-            ]
+            {
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_MULTIBAMSUMMARY",
+                        "deeptools",
+                        "3.5.6"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-02-15T15:01:00.359997",
+        "timestamp": "2026-02-17T09:21:50.768692",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -25,7 +31,11 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0b24ca59514be35f78fa441a80b416eb"
+                    [
+                        "DEEPTOOLS_MULTIBAMSUMMARY",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ],
                 "matrix": [
                     [
@@ -36,12 +46,16 @@
                         "all_bam.bamSummary.npz:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,0b24ca59514be35f78fa441a80b416eb"
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_MULTIBAMSUMMARY",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-02-15T15:01:09.138935",
+        "timestamp": "2026-02-17T09:21:57.616124",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

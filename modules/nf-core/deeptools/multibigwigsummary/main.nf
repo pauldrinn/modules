@@ -13,7 +13,7 @@ process DEEPTOOLS_MULTIBIGWIGSUMMARY {
 
     output:
     tuple val(meta), path("*.npz"), emit: matrix
-    path  "versions.yml"          , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('multiBigwigSummary --version | sed -e "s/multiBigwigSummary //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

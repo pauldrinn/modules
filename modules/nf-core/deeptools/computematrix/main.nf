@@ -14,7 +14,7 @@ process DEEPTOOLS_COMPUTEMATRIX {
     output:
     tuple val(meta), path("*.mat.gz") , emit: matrix
     tuple val(meta), path("*.mat.tab"), emit: table
-    path  "versions.yml"              , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('computeMatrix --version | sed -e "s/computeMatrix //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

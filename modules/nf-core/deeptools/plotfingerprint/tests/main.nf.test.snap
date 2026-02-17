@@ -6,11 +6,17 @@
             [
                 false
             ],
-            [
-                "versions.yml:md5,cdc19d1b7a71e7aced416f36793d13d9"
-            ]
+            {
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTFINGERPRINT",
+                        "deeptools",
+                        "3.5.6"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-02-15T15:03:55.608069",
+        "timestamp": "2026-02-17T09:51:08.91017",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -47,7 +53,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,cdc19d1b7a71e7aced416f36793d13d9"
+                    [
+                        "DEEPTOOLS_PLOTFINGERPRINT",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ],
                 "matrix": [
                     [
@@ -76,12 +86,16 @@
                         "test.plotFingerprint.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,cdc19d1b7a71e7aced416f36793d13d9"
+                "versions_deeptools": [
+                    [
+                        "DEEPTOOLS_PLOTFINGERPRINT",
+                        "deeptools",
+                        "3.5.6"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-02-15T15:04:06.5646",
+        "timestamp": "2026-02-17T09:42:56.510167",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

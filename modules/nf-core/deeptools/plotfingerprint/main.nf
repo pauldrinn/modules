@@ -14,7 +14,7 @@ process DEEPTOOLS_PLOTFINGERPRINT {
     tuple val(meta), path("*.pdf")          , emit: pdf
     tuple val(meta), path("*.raw.txt")      , emit: matrix
     tuple val(meta), path("*.qcmetrics.txt"), emit: metrics
-    path  "versions.yml"                    , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('plotFingerprint --version | sed -e "s/plotFingerprint //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

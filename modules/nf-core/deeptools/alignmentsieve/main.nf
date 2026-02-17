@@ -12,7 +12,8 @@ process DEEPTOOLS_ALIGNMENTSIEVE {
 
     output:
     tuple val(meta), path("*_as.bam") , emit: bam
-    path  "versions.yml"              , emit: versions
+    tuple val("${task.process}"), val('deeptools'), eval('alignmentSieve --version | sed -e "s/alignmentSieve //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('samtools'), eval('samtools --version | head -n1 | sed -e "s/samtools //g"') , emit: versions_samtools, topic: versions
     path  "*_log.txt"                 , emit: logs
 
     when:
@@ -32,6 +33,7 @@ process DEEPTOOLS_ALIGNMENTSIEVE {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         deeptools: \$(alignmentSieve --version | sed -e "s/alignmentSieve //g")
+        samtools: \$(samtools --version | head -n1 | sed -e "s/samtools //g")
     END_VERSIONS
     """
 
@@ -44,6 +46,7 @@ process DEEPTOOLS_ALIGNMENTSIEVE {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         deeptools: \$(alignmentSieve --version | sed -e "s/alignmentSieve //g")
+        samtools: \$(samtools --version | head -n1 | sed -e "s/samtools //g")
     END_VERSIONS
     """
 }
