@@ -16,8 +16,8 @@ process DEEPTOOLS_BAMCOVERAGE {
     output:
     tuple val(meta), path("*.bigWig")  , emit: bigwig  , optional: true
     tuple val(meta), path("*.bedgraph"), emit: bedgraph, optional: true
-    tuple val("${task.process}"), val('deeptools'), eval('bamCoverage --version | sed -e "s/bamCoverage //g"') , emit: versions_deeptools, topic: versions
-    tuple val("${task.process}"), val('samtools'), eval('samtools --version | head -n1 | sed -e "s/samtools //g"') , emit: versions_samtools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('bamCoverage --version | sed "s/bamCoverage //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'") , emit: versions_samtools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -45,12 +45,6 @@ process DEEPTOOLS_BAMCOVERAGE {
             --numberOfProcessors ${task.cpus} \\
             --outFileName ${prefix}.${extension} \\
             $blacklist_cmd
-
-        cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            deeptools: \$(bamCoverage --version | sed -e "s/bamCoverage //g")
-            samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
-        END_VERSIONS
         """
     }
     else {
@@ -61,11 +55,6 @@ process DEEPTOOLS_BAMCOVERAGE {
             --numberOfProcessors ${task.cpus} \\
             --outFileName ${prefix}.${extension} \\
             $blacklist_cmd
-
-        cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            deeptools: \$(bamCoverage --version | sed -e "s/bamCoverage //g")
-        END_VERSIONS
         """
     }
 
@@ -74,11 +63,5 @@ process DEEPTOOLS_BAMCOVERAGE {
     def extension = args.contains("--outFileFormat bedgraph") || args.contains("-of bedgraph") ? "bedgraph" : "bigWig"
     """
     touch ${prefix}.${extension}
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(bamCoverage --version | sed -e "s/bamCoverage //g")
-        samtools: \$(samtools --version | head -n1 | sed -e "s/samtools //g")
-    END_VERSIONS
     """
 }

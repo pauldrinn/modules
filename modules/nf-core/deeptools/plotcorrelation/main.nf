@@ -15,7 +15,7 @@ process DEEPTOOLS_PLOTCORRELATION {
     output:
     tuple val(meta), path("*.pdf"), emit: pdf
     tuple val(meta), path("*.tab"), emit: matrix
-    tuple val("${task.process}"), val('deeptools'), eval('plotCorrelation --version | sed -e "s/plotCorrelation //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('plotCorrelation --version | sed "s/plotCorrelation //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -33,11 +33,6 @@ process DEEPTOOLS_PLOTCORRELATION {
         --whatToPlot $resolved_plot_type \\
         --plotFile ${prefix}.plotCorrelation.pdf \\
         --outFileCorMatrix ${prefix}.plotCorrelation.mat.tab
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(plotCorrelation --version | sed -e "s/plotCorrelation //g")
-    END_VERSIONS
     """
 
     stub:
@@ -45,10 +40,5 @@ process DEEPTOOLS_PLOTCORRELATION {
     """
     touch ${prefix}.plotCorrelation.pdf
     touch ${prefix}.plotCorrelation.mat.tab
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(plotCorrelation --version | sed -e "s/plotCorrelation //g")
-    END_VERSIONS
     """
 }

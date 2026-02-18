@@ -14,7 +14,7 @@ process DEEPTOOLS_COMPUTEMATRIX {
     output:
     tuple val(meta), path("*.mat.gz") , emit: matrix
     tuple val(meta), path("*.mat.tab"), emit: table
-    tuple val("${task.process}"), val('deeptools'), eval('computeMatrix --version | sed -e "s/computeMatrix //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('computeMatrix --version | sed "s/computeMatrix //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -30,11 +30,6 @@ process DEEPTOOLS_COMPUTEMATRIX {
         --outFileName ${prefix}.computeMatrix.mat.gz \\
         --outFileNameMatrix ${prefix}.computeMatrix.vals.mat.tab \\
         --numberOfProcessors $task.cpus
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(computeMatrix --version | sed -e "s/computeMatrix //g")
-    END_VERSIONS
     """
 
     stub:
@@ -42,10 +37,5 @@ process DEEPTOOLS_COMPUTEMATRIX {
     """
     echo "" | gzip > ${prefix}.computeMatrix.mat.gz
     touch ${prefix}.computeMatrix.vals.mat.tab
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(computeMatrix --version | sed -e "s/computeMatrix //g")
-    END_VERSIONS
     """
 }

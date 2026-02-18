@@ -12,8 +12,8 @@ process DEEPTOOLS_ALIGNMENTSIEVE {
 
     output:
     tuple val(meta), path("*_as.bam") , emit: bam
-    tuple val("${task.process}"), val('deeptools'), eval('alignmentSieve --version | sed -e "s/alignmentSieve //g"') , emit: versions_deeptools, topic: versions
-    tuple val("${task.process}"), val('samtools'), eval('samtools --version | head -n1 | sed -e "s/samtools //g"') , emit: versions_samtools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('alignmentSieve --version | sed "s/alignmentSieve //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'") , emit: versions_samtools, topic: versions
     path  "*_log.txt"                 , emit: logs
 
     when:
@@ -29,12 +29,6 @@ process DEEPTOOLS_ALIGNMENTSIEVE {
         -o ${prefix}_as.bam \\
         --filterMetrics ${prefix}_log.txt \\
         --numberOfProcessors $task.cpus
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(alignmentSieve --version | sed -e "s/alignmentSieve //g")
-        samtools: \$(samtools --version | head -n1 | sed -e "s/samtools //g")
-    END_VERSIONS
     """
 
     stub:
@@ -42,11 +36,5 @@ process DEEPTOOLS_ALIGNMENTSIEVE {
     """
     touch ${prefix}_as.bam
     touch ${prefix}_log.txt
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(alignmentSieve --version | sed -e "s/alignmentSieve //g")
-        samtools: \$(samtools --version | head -n1 | sed -e "s/samtools //g")
-    END_VERSIONS
     """
 }

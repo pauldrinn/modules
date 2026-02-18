@@ -13,7 +13,7 @@ process DEEPTOOLS_MULTIBAMSUMMARY {
 
     output:
     tuple val(meta), path("*.npz"), emit: matrix
-    tuple val("${task.process}"), val('deeptools'), eval('multiBamSummary --version | sed -e "s/multiBamSummary //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('multiBamSummary --version | sed "s/multiBamSummary //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -31,21 +31,11 @@ process DEEPTOOLS_MULTIBAMSUMMARY {
         --numberOfProcessors $task.cpus \\
         --outFileName ${prefix}.bamSummary.npz \\
         $blacklist_cmd
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(multiBamSummary --version | sed -e "s/multiBamSummary //g")
-    END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "all_bam"
     """
     touch ${prefix}.bamSummary.npz
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(multiBamSummary --version | sed -e "s/multiBamSummary //g")
-    END_VERSIONS
     """
 }

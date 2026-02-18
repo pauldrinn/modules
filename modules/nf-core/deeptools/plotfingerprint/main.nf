@@ -14,7 +14,7 @@ process DEEPTOOLS_PLOTFINGERPRINT {
     tuple val(meta), path("*.pdf")          , emit: pdf
     tuple val(meta), path("*.raw.txt")      , emit: matrix
     tuple val(meta), path("*.qcmetrics.txt"), emit: metrics
-    tuple val("${task.process}"), val('deeptools'), eval('plotFingerprint --version | sed -e "s/plotFingerprint //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('plotFingerprint --version | sed "s/plotFingerprint //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -32,11 +32,6 @@ process DEEPTOOLS_PLOTFINGERPRINT {
         --outRawCounts ${prefix}.plotFingerprint.raw.txt \\
         --outQualityMetrics ${prefix}.plotFingerprint.qcmetrics.txt \\
         --numberOfProcessors $task.cpus
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(plotFingerprint --version | sed -e "s/plotFingerprint //g")
-    END_VERSIONS
     """
 
     stub:
@@ -45,10 +40,5 @@ process DEEPTOOLS_PLOTFINGERPRINT {
     touch ${prefix}.plotFingerprint.pdf
     touch ${prefix}.plotFingerprint.raw.txt
     touch ${prefix}.plotFingerprint.qcmetrics.txt
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(plotFingerprint --version | sed -e "s/plotFingerprint //g")
-    END_VERSIONS
     """
 }

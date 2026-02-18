@@ -13,7 +13,7 @@ process DEEPTOOLS_PLOTHEATMAP {
     output:
     tuple val(meta), path("*.pdf"), emit: pdf
     tuple val(meta), path("*.tab"), emit: table
-    tuple val("${task.process}"), val('deeptools'), eval('plotHeatmap --version | sed -e "s/plotHeatmap //g"') , emit: versions_deeptools, topic: versions
+    tuple val("${task.process}"), val('deeptools'), eval('plotHeatmap --version | sed "s/plotHeatmap //g"') , emit: versions_deeptools, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -27,11 +27,6 @@ process DEEPTOOLS_PLOTHEATMAP {
         --matrixFile $matrix \\
         --outFileName ${prefix}.plotHeatmap.pdf \\
         --outFileNameMatrix ${prefix}.plotHeatmap.mat.tab
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(plotHeatmap --version | sed -e "s/plotHeatmap //g")
-    END_VERSIONS
     """
 
     stub:
@@ -39,10 +34,5 @@ process DEEPTOOLS_PLOTHEATMAP {
     """
     touch ${prefix}.plotHeatmap.pdf
     touch ${prefix}.plotHeatmap.mat.tab
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        deeptools: \$(plotHeatmap --version | sed -e "s/plotHeatmap //g")
-    END_VERSIONS
     """
 }
