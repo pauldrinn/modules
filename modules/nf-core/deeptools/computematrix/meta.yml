@@ -65,7 +65,7 @@ output:
       - deeptools:
           type: string
           description: The name of the tool
-      - computeMatrix --version | sed -e "s/computeMatrix //g":
+      - computeMatrix --version | sed "s/computeMatrix //g":
           type: eval
           description: The expression to obtain the version of the tool
 topics:
@@ -76,7 +76,7 @@ topics:
       - deeptools:
           type: string
           description: The name of the tool
-      - computeMatrix --version | sed -e "s/computeMatrix //g":
+      - computeMatrix --version | sed "s/computeMatrix //g":
           type: eval
           description: The expression to obtain the version of the tool
 authors:

@@ -64,7 +64,7 @@ output:
       - deeptools:
           type: string
           description: The name of the tool
-      - multiBigwigSummary --version | sed -e "s/multiBigwigSummary //g":
+      - multiBigwigSummary --version | sed "s/multiBigwigSummary //g":
           type: eval
           description: The expression to obtain the version of the tool
 topics:
@@ -75,7 +75,7 @@ topics:
       - deeptools:
           type: string
           description: The name of the tool
-      - multiBigwigSummary --version | sed -e "s/multiBigwigSummary //g":
+      - multiBigwigSummary --version | sed "s/multiBigwigSummary //g":
           type: eval
           description: The expression to obtain the version of the tool
 authors:
